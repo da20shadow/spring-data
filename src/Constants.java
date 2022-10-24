@@ -17,4 +17,9 @@ public enum Constants {
     static final String NO_USER_FORMAT_BY_EMAIL = "No user with Email: %s!!!%n";
     static final String NO_USER_FORMAT_BY_USERNAME = "No user with username: %s!%n";
     static final String USERS_FORMAT = "Name: %s, Email: %s%n";
+
+    /* ---- ERROR MESSAGES ---- */
+    static final String INVALID_USERNAME = "Invalid username! Username must be between 5 - 45 characters long " +
+            "and can only contains letters '_' and digits!";
+    static final String INVALID_EMAIL = "Invalid email!";
 }
