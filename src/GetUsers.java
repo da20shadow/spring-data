@@ -13,7 +13,14 @@ public class GetUsers {
             "SELECT username,email,first_name,last_name " +
                     "FROM users " +
                     "WHERE id = ?";
-
+    private static final String GET_USER_BY_USERNAME =
+            "SELECT username,email,first_name,last_name " +
+                    "FROM users " +
+                    "WHERE username = ?";
+    private static final String GET_USER_BY_EMAIL =
+            "SELECT username,email,first_name,last_name " +
+                    "FROM users " +
+                    "WHERE email = ?";
 
 
     public static void main(String[] args) throws SQLException {
