@@ -41,8 +41,7 @@ public class GetUsers {
                 int user_id = Integer.parseInt(command);
                 getUserById(connection,user_id);
             }else if (isValidEmail(command)){
-                String email = command;
-                getUserByEmail(connection,email);
+                getUserByEmail(connection,command);
             }else {
                 System.out.println("Finished!");
                 connection.close();
@@ -76,7 +75,7 @@ public class GetUsers {
         ResultSet resultSet = statement.executeQuery();
 
         if (!resultSet.next()) {
-            System.out.printf(Constants.NO_USER_FORMAT,user_id);
+            System.out.printf(Constants.NO_USER_FORMAT_BY_ID,user_id);
             return;
         }
 
@@ -84,6 +83,20 @@ public class GetUsers {
         String email = resultSet.getString(Constants.COLUMN_LABEL_EMAIL);
 
         System.out.printf(Constants.USERS_FORMAT,name,email);
+    }
+
+    private static void getUserByEmail(Connection connection, String email) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(GET_USER_BY_EMAIL);
+        statement.setString(1,email);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (!resultSet.next()) {
+            System.out.printf(Constants.NO_USER_FORMAT_BY_EMAIL,email);
+            return;
+        }
+        String username = resultSet.getString(Constants.COLUMN_LABEL_USERNAME);
+        String userEmail = resultSet.getString(Constants.COLUMN_LABEL_EMAIL);
+        System.out.printf(Constants.USERS_FORMAT,username,userEmail);
     }
 
     private static boolean isInteger(String input){
@@ -96,7 +109,8 @@ public class GetUsers {
     }
 
     private static boolean isValidEmail(String command) {
-        Pattern emailPattern = Pattern.compile("^[a-z0-9_]+[@][a-z][.com]$",Pattern.CASE_INSENSITIVE);
+        Pattern emailPattern =
+                Pattern.compile("^[a-z1-9_]+[@][a-z]+[.com]+$",Pattern.CASE_INSENSITIVE);
         Matcher matcher = emailPattern.matcher(command);
         return matcher.find();
     }
