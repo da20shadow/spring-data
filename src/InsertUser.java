@@ -25,4 +25,16 @@ public class InsertUser {
 
         return matcher.find();
     }
+
+    private static boolean isEmailValid(String email){
+        email = email.trim();
+
+        if (email.isEmpty()){
+            return false;
+        }
+        Pattern emailPattern = Pattern.compile(Constants.EMAIL_PATTERN,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = emailPattern.matcher(email);
+
+        return matcher.find();
+    }
 }
