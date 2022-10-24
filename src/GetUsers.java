@@ -14,4 +14,32 @@ public class GetUsers {
                     "FROM users " +
                     "WHERE id = ?";
 
+
+
+    public static void main(String[] args) throws SQLException {
+
+        final Connection connection = Utils.getSQLConnection();
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNext()){
+
+            String command = scanner.nextLine();
+
+            if (command.equals("all")){
+                getAllUsers(connection);
+            }else if (isInteger(command)){
+                int user_id = Integer.parseInt(command);
+                getUserById(connection,user_id);
+            }else {
+                System.out.println("Finished!");
+                connection.close();
+                return;
+            }
+        }
+
+    }
+
+
+
 }
