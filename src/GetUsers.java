@@ -127,14 +127,14 @@ public class GetUsers {
 
     private static boolean isValidUsername(String command) {
         Pattern usernamePattern =
-                Pattern.compile("^[a-z1-9_]{5,45}$",Pattern.CASE_INSENSITIVE);
+                Pattern.compile(Constants.USERNAME_PATTERN,Pattern.CASE_INSENSITIVE);
         Matcher matcher = usernamePattern.matcher(command);
         return matcher.find();
     }
 
     private static boolean isValidEmail(String command) {
         Pattern emailPattern =
-                Pattern.compile("^[a-z1-9_]+[@][a-z]+[.com]+$",Pattern.CASE_INSENSITIVE);
+                Pattern.compile(Constants.EMAIL_PATTERN,Pattern.CASE_INSENSITIVE);
         Matcher matcher = emailPattern.matcher(command);
         return matcher.find();
     }
