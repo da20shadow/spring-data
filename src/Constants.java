@@ -13,6 +13,7 @@ public enum Constants {
     static final String COLUMN_LABEL_EMAIL = "email";
 
     /* ---FORMAT MESSAGES--- */
-    static final String NO_USER_FORMAT = "No user with ID: %d!!!%n";
+    static final String NO_USER_FORMAT_BY_ID = "No user with ID: %d!!!%n";
+    static final String NO_USER_FORMAT_BY_EMAIL = "No user with Email: %s!!!%n";
     static final String USERS_FORMAT = "Name: %s, Email: %s%n";
 }
