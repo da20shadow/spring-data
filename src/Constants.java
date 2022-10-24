@@ -23,8 +23,12 @@ public enum Constants {
             "and can only contains letters '_' and digits!";
     static final String INVALID_EMAIL = "Invalid email!";
     static final String INVALID_USER_ID = "Invalid user ID!";
+    static final String EMAIL_NOT_UPDATED = "An Error Occur! Email Not updated! Please, try again!";
 
-    /* REGEX PATTERNS */
+    /* ---- SUCCESS MESSAGES ---- */
+    static final String EMAIL_SUCCESSFULLY_UPDATED = "Successfully updated email!";
+
+    /* ---- REGEX PATTERNS ---- */
     static final String USERNAME_PATTERN = "^[a-z1-9_]{5,45}$";
     static final String EMAIL_PATTERN = "^[a-z1-9_]+[@][a-z]+[.com]+$";
 }
