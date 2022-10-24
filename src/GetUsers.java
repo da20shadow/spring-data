@@ -3,8 +3,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class GetUsers {
 
@@ -37,12 +35,12 @@ public class GetUsers {
 
             if (command.equals("all")){
                 getAllUsers(connection);
-            }else if (isInteger(command)){
+            }else if (Validator.isInteger(command)){
                 int user_id = Integer.parseInt(command);
                 getUserById(connection,user_id);
-            }else if (isValidUsername(command)){
+            }else if (Validator.isValidUsername(command)){
                 getUserByUsername(connection,command);
-            }else if (isValidEmail(command)){
+            }else if (Validator.isValidEmail(command)){
                 getUserByEmail(connection,command);
             }else {
                 System.out.println("Finished!");
@@ -116,26 +114,4 @@ public class GetUsers {
         System.out.printf(Constants.USERS_FORMAT,username,userEmail);
     }
 
-    private static boolean isInteger(String input){
-        try {
-            int number = Integer.parseInt(input);
-            return true;
-        }catch (NumberFormatException exception){
-            return false;
-        }
-    }
-
-    private static boolean isValidUsername(String command) {
-        Pattern usernamePattern =
-                Pattern.compile(Constants.USERNAME_PATTERN,Pattern.CASE_INSENSITIVE);
-        Matcher matcher = usernamePattern.matcher(command);
-        return matcher.find();
-    }
-
-    private static boolean isValidEmail(String command) {
-        Pattern emailPattern =
-                Pattern.compile(Constants.EMAIL_PATTERN,Pattern.CASE_INSENSITIVE);
-        Matcher matcher = emailPattern.matcher(command);
-        return matcher.find();
-    }
 }
