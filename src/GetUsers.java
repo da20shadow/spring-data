@@ -40,6 +40,8 @@ public class GetUsers {
             }else if (isInteger(command)){
                 int user_id = Integer.parseInt(command);
                 getUserById(connection,user_id);
+            }else if (isValidUsername(command)){
+                getUserByUsername(connection,command);
             }else if (isValidEmail(command)){
                 getUserByEmail(connection,command);
             }else {
@@ -85,6 +87,21 @@ public class GetUsers {
         System.out.printf(Constants.USERS_FORMAT,name,email);
     }
 
+    private static void getUserByUsername(Connection connection, String username) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(GET_USER_BY_USERNAME);
+        statement.setString(1,username);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (!resultSet.next()) {
+            System.out.printf(Constants.NO_USER_FORMAT_BY_USERNAME,username);
+            return;
+        }
+        String name = resultSet.getString(Constants.COLUMN_LABEL_USERNAME);
+        String email = resultSet.getString(Constants.COLUMN_LABEL_EMAIL);
+
+        System.out.printf(Constants.USERS_FORMAT,name,email);
+    }
+
     private static void getUserByEmail(Connection connection, String email) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(GET_USER_BY_EMAIL);
         statement.setString(1,email);
@@ -106,6 +123,13 @@ public class GetUsers {
         }catch (NumberFormatException exception){
             return false;
         }
+    }
+
+    private static boolean isValidUsername(String command) {
+        Pattern usernamePattern =
+                Pattern.compile("^[a-z1-9_]{5,45}$",Pattern.CASE_INSENSITIVE);
+        Matcher matcher = usernamePattern.matcher(command);
+        return matcher.find();
     }
 
     private static boolean isValidEmail(String command) {
