@@ -40,6 +40,20 @@ public class GetUsers {
 
     }
 
+    private static void getAllUsers(Connection connection) throws SQLException {
+
+        final PreparedStatement statement =
+                connection.prepareStatement(GET_ALL_USERS);
+        final ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()){
+
+            String name = resultSet.getString(Constants.COLUMN_LABEL_USERNAME);
+            String email = resultSet.getString(Constants.COLUMN_LABEL_EMAIL);
+
+            System.out.printf(Constants.USERS_FORMAT,name,email);
+        }
+    }
 
 
 }
