@@ -55,5 +55,31 @@ public class GetUsers {
         }
     }
 
+    private static void getUserById(Connection connection, int user_id) throws SQLException {
 
+        final PreparedStatement statement = connection.prepareStatement(GET_USER_BY_ID);
+
+        statement.setInt(1,user_id);
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if (!resultSet.next()) {
+            System.out.printf(Constants.NO_USER_FORMAT,user_id);
+            return;
+        }
+
+        String name = resultSet.getString(Constants.COLUMN_LABEL_USERNAME);
+        String email = resultSet.getString(Constants.COLUMN_LABEL_EMAIL);
+
+        System.out.printf(Constants.USERS_FORMAT,name,email);
+    }
+
+    private static boolean isInteger(String input){
+        try {
+            int number = Integer.parseInt(input);
+            return true;
+        }catch (NumberFormatException exception){
+            return false;
+        }
+    }
 }
