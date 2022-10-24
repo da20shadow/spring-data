@@ -52,12 +52,6 @@ public class GetUsers {
 
     }
 
-    private static boolean isValidEmail(String command) {
-        Pattern emailPattern = Pattern.compile("^[a-z0-9_]+[@][a-z][.com]$",Pattern.CASE_INSENSITIVE);
-        Matcher matcher = emailPattern.matcher(command);
-        return matcher.find();
-    }
-
     private static void getAllUsers(Connection connection) throws SQLException {
 
         final PreparedStatement statement =
@@ -99,5 +93,11 @@ public class GetUsers {
         }catch (NumberFormatException exception){
             return false;
         }
+    }
+
+    private static boolean isValidEmail(String command) {
+        Pattern emailPattern = Pattern.compile("^[a-z0-9_]+[@][a-z][.com]$",Pattern.CASE_INSENSITIVE);
+        Matcher matcher = emailPattern.matcher(command);
+        return matcher.find();
     }
 }
