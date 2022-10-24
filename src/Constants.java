@@ -22,4 +22,8 @@ public enum Constants {
     static final String INVALID_USERNAME = "Invalid username! Username must be between 5 - 45 characters long " +
             "and can only contains letters '_' and digits!";
     static final String INVALID_EMAIL = "Invalid email!";
+
+    /* REGEX PATTERNS */
+    static final String USERNAME_PATTERN = "^[a-z1-9_]{5,45}$";
+    static final String EMAIL_PATTERN = "^[a-z1-9_]+[@][a-z]+[.com]+$";
 }
