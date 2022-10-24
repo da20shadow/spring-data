@@ -15,5 +15,6 @@ public enum Constants {
     /* ---FORMAT MESSAGES--- */
     static final String NO_USER_FORMAT_BY_ID = "No user with ID: %d!!!%n";
     static final String NO_USER_FORMAT_BY_EMAIL = "No user with Email: %s!!!%n";
+    static final String NO_USER_FORMAT_BY_USERNAME = "No user with username: %s!%n";
     static final String USERS_FORMAT = "Name: %s, Email: %s%n";
 }
