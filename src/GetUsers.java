@@ -3,6 +3,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GetUsers {
 
@@ -38,6 +40,9 @@ public class GetUsers {
             }else if (isInteger(command)){
                 int user_id = Integer.parseInt(command);
                 getUserById(connection,user_id);
+            }else if (isValidEmail(command)){
+                String email = command;
+                getUserByEmail(connection,email);
             }else {
                 System.out.println("Finished!");
                 connection.close();
@@ -45,6 +50,12 @@ public class GetUsers {
             }
         }
 
+    }
+
+    private static boolean isValidEmail(String command) {
+        Pattern emailPattern = Pattern.compile("^[a-z0-9_]+[@][a-z][.com]$",Pattern.CASE_INSENSITIVE);
+        Matcher matcher = emailPattern.matcher(command);
+        return matcher.find();
     }
 
     private static void getAllUsers(Connection connection) throws SQLException {
